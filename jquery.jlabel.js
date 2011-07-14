@@ -38,7 +38,7 @@
 		var opts = $.extend({}, $.fn.jLabel.defaults, options);
 
 		return this.each(function() {
-			$this = $(this);
+			var $this = $(this);
 
 			states.push(new state($this));
 
@@ -50,10 +50,10 @@
 
 		// Private: state object
 		function state($input) {
-
+			var $input;
 			// Public Method: equals
 			this.equals = function($input) {
-				return $input.attr('id') == this.input.attr('id');
+				return $input.prop('id') == this.input.prop('id');
 			};
 
 			// Public Properties
@@ -81,15 +81,17 @@
 
 		// Private: Get an input's related label, or create a new one if none found
 		function getLabel($input) {
-			
+
+			$input.prop('id', $input.prop('id') || 'jLabel-'+(new Date).getTime()+Math.floor(Math.random()*101));
+
 			// Get the label related to the passed input
-			var $label = $('label[for=' + $input.attr('id') + ']');
+			var $label = $('label[for=' + $input.prop('id') + ']');
 
 			// If no label has been found create one
 			if ($label.size() == 0) {
 				$label = $('<label>')
-								.attr('for', $input.attr('id'))
-								.text($input.attr('title'));
+								.prop('for', $input.prop('id'))
+								.text(getText($input));
 			};
 			
 			// If this is a new label insert it into the DOM, if not then move it directly before it's related input
@@ -122,8 +124,15 @@
 						'left'			: opts.xShift + parseInt($input.css("padding-left")) + 'px',
 						'top'			: opts.yShift + 'px'
 					});
-
+			
 			return $label;
+		};
+		
+		function getText($input){
+			if(opts.text) return opts.text;
+			if($.isFunction($input.metadata) && $input.metadata().label) return $input.metadata().label;
+			if($.isFunction(opts.populateFrom)) return opts.populateFrom.call($input);
+			return $input.prop(opts.populateFrom);
 		};
 
 		// Private: Toggle label opacity on input focus
@@ -158,7 +167,9 @@
 		speed 	: 200,
 		opacity : 0.4,
 		xShift 	: 2,
-		yShift 	: 0
+		yShift 	: 0,
+		populateFrom : 'title',
+		title	: null
 	};
 
 })(jQuery);
