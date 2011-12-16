@@ -101,7 +101,7 @@
 			$label
 				.css({
 					'font-family'		: opts['font-family'] || $input.css('font-family'),
-					'font-size'			: opts['font-size'] || $input.css('font-size'),
+					'font-size'		: opts['font-size'] || $input.css('font-size'),
 					'font-style'		: opts['font-style'] || $input.css('font-style'),
 					'font-variant'		: opts['font-variant'] || $input.css('font-variant'),
 					'font-weight'		: opts['font-weight'] || $input.css('font-weight'),
@@ -109,9 +109,10 @@
 					'line-height'		: opts['line-height'] || $input.css('line-height'),
 					'text-decoration'	: opts['text-decoration'] || $input.css('text-decoration'),
 					'text-transform'	: opts['text-transform'] || $input.css('text-transform'),
-					'color'				: opts['color'] || $input.css('color'),
-					'cursor'			: opts['cursor'] || $input.css('cursor'),
-					'display'			: 'inline-block'
+					'color'			: opts['color'] || $input.css('color'),
+					'cursor'		: opts['cursor'] || $input.css('cursor'),
+					'display'		: 'inline-block',
+					'vertical-align'	: opts['vertical-align'] || $input.css('vertical-align')
 				});
 
 			// Stop the label from being selectable and position it relative to it's input
@@ -164,12 +165,13 @@
 
 	// Public: Default values
 	$.fn.jLabel.defaults = {
-		speed 	: 200,
-		opacity : 0.4,
-		xShift 	: 2,
-		yShift 	: 0,
-		populateFrom : 'title',
-		title	: null
+		speed 		: 200,
+		opacity 	: 0.4,
+		xShift 		: 2,
+		yShift 		: 0,
+		populateFrom 	: 'title',
+		title		: null,
+		'vertical-align': 'top'
 	};
 
 })(jQuery);
