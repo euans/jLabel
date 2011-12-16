@@ -112,7 +112,8 @@
 					'color'			: opts['color'] || $input.css('color'),
 					'cursor'		: opts['cursor'] || $input.css('cursor'),
 					'display'		: 'inline-block',
-					'vertical-align'	: opts['vertical-align'] || $input.css('vertical-align')
+					'vertical-align'	: opts['vertical-align'] || $input.css('vertical-align'),
+					'width'			: opts['width'] || $input.width()-(opts.yShift * 2)
 				});
 
 			// Stop the label from being selectable and position it relative to it's input
